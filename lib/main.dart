@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:savvisound_v2/theme/app_theme.dart';
 import 'package:savvisound_v2/routes/routes.dart';
 import 'package:savvisound_v2/routes/routes_import.dart';
 import 'package:savvisound_v2/service/get_it.dart';
@@ -32,7 +32,9 @@ class SavviApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(useMaterial3: true),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       initialRoute: RoutesName.splash,
 
       navigatorKey: NavigationService().navigatorKey,

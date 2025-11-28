@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:savvisound_v2/common/gradient_body.dart';
+import 'package:savvisound_v2/constants/app_colors.dart';
 import 'package:savvisound_v2/routes/routes_name.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -57,7 +58,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     child:
                         SvgPicture.asset(
                           "assets/images/SavviSoundTM-logo-Text.svg",
-                          //colorFilter: const ColorFilter.mode(AppColors.inputBorderColor, BlendMode.srcIn),
+                          colorFilter: const ColorFilter.mode(
+                            AppColors.mainBg,
+                            BlendMode.srcIn,
+                          ),
                           width: 387,
                         ).fadeIn(
                           duration: const Duration(milliseconds: 1000),

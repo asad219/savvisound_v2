@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:savvisound_v2/constants/app_constants.dart';
 
 class AppTheme {
   // Brand Colors
@@ -26,6 +27,7 @@ class AppTheme {
 
   // Light Theme
   static ThemeData lightTheme = ThemeData(
+    fontFamily: AppConstants.monospacedFontFamilyName,
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
@@ -51,6 +53,7 @@ class AppTheme {
         color: neutral900,
         fontSize: 20,
         fontWeight: FontWeight.w600,
+        fontFamily: AppConstants.fontFamilyName,
       ),
     ),
 
