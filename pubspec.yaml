@@ -63,6 +63,9 @@ dependencies:
   iconsax: ^0.0.8
   just_audio: ^0.10.5
 
+  # Cached Network Image
+  cached_network_image: ^3.4.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -106,6 +109,12 @@ flutter:
       fonts:
         - asset: fonts/proximanova_regular.ttf
         - asset: fonts/proximanova_bold.otf
+    - family: Monospaced
+      fonts:
+        - asset: fonts/monospaced.ttf
+        - asset: fonts/DroidSansMono.ttf
+        - asset: fonts/CourierPrime-Regular.ttf
+        - asset: fonts/RobotoMono-VariableFont_wght.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

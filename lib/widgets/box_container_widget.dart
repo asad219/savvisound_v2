@@ -42,13 +42,13 @@ class BoxContainerWidget extends StatelessWidget {
             Text(
               boxTitle,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: AppColors.mainBg,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 15.0),
+              padding: const EdgeInsets.only(right: 5.0),
               child: titleWidget ?? const SizedBox.shrink(),
             ),
           ],
@@ -60,7 +60,7 @@ class BoxContainerWidget extends StatelessWidget {
           padding: padding,
           margin: margin,
           decoration: BoxDecoration(
-            color: backgroundColor.withAlpha(20),
+            color: backgroundColor.withAlpha(30),
             borderRadius: BorderRadius.circular(borderRadius),
             border: border,
             boxShadow: boxShadow,

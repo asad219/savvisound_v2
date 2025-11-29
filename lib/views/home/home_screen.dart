@@ -2,6 +2,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:savvisound_v2/common/gradient_body.dart';
 import 'package:savvisound_v2/constants/app_colors.dart';
 import 'package:savvisound_v2/routes/routes_import.dart';
+import 'package:savvisound_v2/views/hydrate/hydrate_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
     DashboardScreen(),
     const Center(child: Text('Progress', style: TextStyle(fontSize: 22))),
     const Center(child: Text('Schedule', style: TextStyle(fontSize: 22))),
-    const Center(child: Text('Hydrate', style: TextStyle(fontSize: 22))),
+    HydrateScreen(),
     const Center(child: Text('Track', style: TextStyle(fontSize: 22))),
     const Center(child: Text('Journey', style: TextStyle(fontSize: 22))),
   ];

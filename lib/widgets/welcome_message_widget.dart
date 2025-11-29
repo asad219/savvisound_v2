@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:animate_do/animate_do.dart';
 
 class WelcomeMessageWidget extends StatelessWidget {
   final String userName;
@@ -20,8 +22,9 @@ class WelcomeMessageWidget extends StatelessWidget {
     super.key,
     required this.userName,
     this.welcomeMessage = 'Welcome Back,',
+    //this.avatarImageUrl =        "https://nomorecopyright.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fddtk9h9bc%2Fimage%2Fupload%2Fv1758886351%2Fvzxc6nry9zxebdru3g6i.webp&w=1200&q=75",
     this.avatarImageUrl =
-        "https://nomorecopyright.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fddtk9h9bc%2Fimage%2Fupload%2Fv1758886351%2Fvzxc6nry9zxebdru3g6i.webp&w=1200&q=75",
+        "https://alnisastore.com/wp-content/uploads/2025/11/photo.png",
     this.avatarRadius = 30,
     this.spacing = 16,
     this.welcomeFontSize = 14,
@@ -41,9 +44,9 @@ class WelcomeMessageWidget extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: avatarRadius,
-          backgroundColor: avatarBackgroundColor ?? Colors.grey.shade300,
+
           backgroundImage: avatarImageUrl != null && avatarImageUrl!.isNotEmpty
-              ? NetworkImage(avatarImageUrl!)
+              ? CachedNetworkImageProvider(avatarImageUrl!)
               : null,
           child: avatarImageUrl == null || avatarImageUrl!.isEmpty
               ? Icon(

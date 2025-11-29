@@ -1,4 +1,6 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:savvisound_v2/constants/app_colors.dart';
 import 'package:savvisound_v2/theme/app_theme.dart';
 import 'package:savvisound_v2/routes/routes.dart';
 import 'package:savvisound_v2/routes/routes_import.dart';
@@ -80,8 +82,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 progress: 0.5,
                 color: Colors.lightBlue,
                 strokeWidth: 5,
-                startIcon: Iconsax.home,
-                endIcon: Iconsax.drop,
+                startIcon: SvgPicture.asset(
+                  "assets/icons/heart.svg",
+                  width: 28,
+                  height: 28,
+                  color: Colors.lightBlue,
+                ),
+                endIcon: SvgPicture.asset(
+                  "assets/icons/heart.svg",
+                  width: 28,
+                  height: 28,
+                  color: Colors.lightBlue,
+                ),
               ),
             ),
             Transform.translate(
@@ -94,7 +106,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 backgroundColor: Colors.blue.shade50,
                 borderColor: Colors.blue.shade200,
                 borderWidth: 4.0,
-                bottomIcon: Icons.local_drink_outlined,
+                bottomIcon: SvgPicture.asset(
+                  "assets/icons/glass-fill.svg",
+                  colorFilter: ColorFilter.mode(
+                    AppColors.tuneColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
                 bottomIconSize: 40,
                 bottomIconColor: Colors.blue.shade700,
               ),

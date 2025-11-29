@@ -27,7 +27,7 @@ class AppTheme {
 
   // Light Theme
   static ThemeData lightTheme = ThemeData(
-    fontFamily: AppConstants.monospacedFontFamilyName,
+    fontFamily: AppConstants.fontFamilyName,
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(

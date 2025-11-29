@@ -9,7 +9,7 @@ class LiquidProgressWidget extends StatelessWidget {
   final Color backgroundColor;
   final Color borderColor;
   final double borderWidth;
-  final IconData bottomIcon;
+  final Widget bottomIcon;
   final double bottomIconSize;
   final Color bottomIconColor;
 
@@ -22,7 +22,7 @@ class LiquidProgressWidget extends StatelessWidget {
     Color? backgroundColor,
     Color? borderColor,
     this.borderWidth = 4.0,
-    this.bottomIcon = Icons.local_drink_outlined,
+    this.bottomIcon = const Icon(Icons.local_drink_outlined),
     this.bottomIconSize = 40,
     Color? bottomIconColor,
   }) : backgroundColor = backgroundColor ?? const Color(0xFFE3F2FD),
@@ -69,11 +69,7 @@ class LiquidProgressWidget extends StatelessWidget {
                 ),
               ],
             ),
-            child: Icon(
-              bottomIcon,
-              size: bottomIconSize,
-              color: bottomIconColor,
-            ),
+            child: Padding(padding: EdgeInsets.all(5.0), child: bottomIcon),
           ),
         ),
       ],

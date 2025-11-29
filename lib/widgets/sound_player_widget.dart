@@ -1,28 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:savvisound_v2/constants/app_colors.dart';
+import 'package:savvisound_v2/constants/app_constants.dart';
 
-class SoundPlayerWidget extends StatelessWidget {
+class SoundPlayerWidget extends StatefulWidget {
   final int repeatCount;
-  final VoidCallback onPlay;
-  final VoidCallback onIncrease;
-  final VoidCallback onDecrease;
-
+  final VoidCallback? onPlay;
+  final VoidCallback? onIncrease;
+  final VoidCallback? onDecrease;
   final Duration progress;
   final Duration totalDuration;
+  final String? url;
 
   const SoundPlayerWidget({
     super.key,
     required this.repeatCount,
-    required this.onPlay,
-    required this.onIncrease,
-    required this.onDecrease,
+    this.onPlay,
+    this.onIncrease,
+    this.onDecrease,
     required this.progress,
     required this.totalDuration,
+    this.url,
   });
 
   @override
+  State<SoundPlayerWidget> createState() => _SoundPlayerWidgetState();
+}
+
+class _SoundPlayerWidgetState extends State<SoundPlayerWidget> {
+  late final AudioPlayer _player;
+  bool _isPlaying = false;
+  Duration _position = Duration.zero;
+  Duration _duration = Duration.zero;
+
+  @override
+  void initState() {
+    super.initState();
+    _player = AudioPlayer();
+    _listen();
+    _setSource();
+  }
+
+  Future<void> _setSource() async {
+    try {
+      if (widget.url != null) {
+        await _player.setUrl(widget.url!);
+      }
+    } catch (_) {}
+  }
+
+  void _listen() {
+    _player.playerStateStream.listen((state) {
+      final playing = state.playing;
+      if (mounted) setState(() => _isPlaying = playing);
+    });
+    _player.positionStream.listen((p) {
+      if (mounted) setState(() => _position = p);
+    });
+    _player.durationStream.listen((d) {
+      if (d != null && mounted) setState(() => _duration = d);
+    });
+  }
+
+  @override
+  void dispose() {
+    _player.dispose();
+    super.dispose();
+  }
+
+  double get _progressValue {
+    final totalMs =
+        (_duration == Duration.zero ? widget.totalDuration : _duration)
+            .inMilliseconds;
+    final posMs = (_position == Duration.zero ? widget.progress : _position)
+        .inMilliseconds;
+    if (totalMs == 0) return 0;
+    return (posMs / totalMs).clamp(0.0, 1.0);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    double progressValue = progress.inSeconds / totalDuration.inSeconds;
+    double progressValue = _progressValue;
 
     return Container(
       child: Column(
@@ -56,17 +114,21 @@ class SoundPlayerWidget extends StatelessWidget {
 
               // Duration
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 15,
-                ),
+                width: 60,
+                height: 60,
                 decoration: BoxDecoration(
-                  color: AppColors.mainBg.withAlpha(200),
-                  borderRadius: BorderRadius.circular(50),
+                  color: AppColors.mainBg.withAlpha(255),
+                  shape: BoxShape.circle,
                 ),
-                child: Text(
-                  "${repeatCount} x",
-                  style: const TextStyle(color: Colors.white),
+                child: Center(
+                  child: Text(
+                    "${widget.repeatCount}x",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -96,18 +158,26 @@ class SoundPlayerWidget extends StatelessWidget {
                 children: [
                   // Play button
                   InkWell(
-                    onTap: onPlay,
+                    splashColor: AppColors.transparent,
+                    onTap: () async {
+                      if (_isPlaying) {
+                        await _player.pause();
+                      } else {
+                        await _player.play();
+                        widget.onPlay?.call();
+                      }
+                    },
                     child: Container(
                       height: 60,
                       width: 60,
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.mainBg,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
-                        Icons.play_arrow,
+                      child: Icon(
+                        _isPlaying ? Icons.pause : Icons.play_arrow,
                         size: 32,
-                        color: Color(0xFF1D5CF5),
+                        color: AppColors.inputBorderColor,
                       ),
                     ),
                   ),
@@ -121,7 +191,7 @@ class SoundPlayerWidget extends StatelessWidget {
                   const Text("Progress", style: TextStyle(color: Colors.white)),
                   const SizedBox(height: 5),
                   Text(
-                    "${_format(progress)} / ${_format(totalDuration)}",
+                    "${_format(_position == Duration.zero ? widget.progress : _position)} / ${_format(_duration == Duration.zero ? widget.totalDuration : _duration)}",
                     style: const TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
@@ -134,22 +204,7 @@ class SoundPlayerWidget extends StatelessWidget {
   }
 
   // Counter button widget
-  Widget _counterButton(String text, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white24,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          text,
-          style: const TextStyle(color: Colors.white, fontSize: 20),
-        ),
-      ),
-    );
-  }
+  // (counter button removed, not used)
 
   // Format duration mm:ss
   String _format(Duration d) {
