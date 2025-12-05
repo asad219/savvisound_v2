@@ -6,8 +6,6 @@ import 'package:savvisound_v2/widgets/animated_semi_circle_progress_widget.dart'
 import 'package:savvisound_v2/widgets/box_container_widget.dart';
 import 'package:savvisound_v2/widgets/chip_widget.dart';
 import 'package:savvisound_v2/widgets/liquid_progress_widget.dart';
-import 'package:savvisound_v2/widgets/sound_player_widget.dart';
-import 'package:savvisound_v2/widgets/welcome_message_widget.dart';
 
 import '../../widgets/dashboard_app_bar_widget.dart';
 
@@ -35,70 +33,86 @@ class _HydrateScreenState extends State<HydrateScreen> {
                 boxTitle: "Hydration Overview",
                 child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Center(
-                        child: AnimatedSemiCircleProgress(
-                          progress: 0.5,
-                          color: Colors.lightBlue,
-                          strokeWidth: 5,
-                          startIcon: SvgPicture.asset(
-                            "assets/icons/heart.svg",
-                            width: 28,
-                            height: 28,
-                            colorFilter: ColorFilter.mode(
-                              AppColors.redWarning,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          endIcon: SvgPicture.asset(
-                            "assets/icons/drop.svg",
-                            width: 28,
-                            height: 28,
-                            colorFilter: ColorFilter.mode(
-                              AppColors.tuneColor,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Transform.translate(
-                        offset: const Offset(0, -100),
-                        child: LiquidProgressWidget(
-                          progress: 0.7,
-                          displayText: "60/64 oz",
-                          size: 200,
-                          progressColor: Colors.blue,
-                          backgroundColor: Colors.blue.shade50,
-                          borderColor: Colors.blue.shade200,
-                          borderWidth: 4.0,
-                          bottomIcon: SvgPicture.asset(
-                            "assets/icons/glass-fill.svg",
-                            colorFilter: ColorFilter.mode(
-                              AppColors.tuneColor,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          bottomIconSize: 30,
-                          bottomIconColor: Colors.blue.shade700,
-                        ),
-                      ),
-                      //const SizedBox(height: 20),
+                    children: [
                       SizedBox(
-                        width: 170,
-                        child: ChipWidget(
-                          icon: Icon(
-                            Icons.water_drop_outlined,
-                            size: 20,
-                            color: AppColors.whiteColor,
+                        height: 240,
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: [
+                            // Semi-circle at the top with icons
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: AnimatedSemiCircleProgress(
+                                progress: 0.5,
+                                color: Colors.lightBlue,
+                                strokeWidth: 5,
+                                startIcon: SvgPicture.asset(
+                                  "assets/icons/heart.svg",
+                                  width: 28,
+                                  height: 28,
+                                  colorFilter: ColorFilter.mode(
+                                    AppColors.redWarning,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                                endIcon: SvgPicture.asset(
+                                  "assets/icons/drop.svg",
+                                  width: 28,
+                                  height: 28,
+                                  colorFilter: ColorFilter.mode(
+                                    AppColors.tuneColor,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // Overlay the liquid progress without affecting layout
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: LiquidProgressWidget(
+                                  progress: 0.7,
+                                  displayText: "60/64 oz",
+                                  size: 200,
+                                  progressColor: Colors.blue,
+                                  backgroundColor: Colors.blue.shade50,
+                                  borderColor: Colors.blue.shade200,
+                                  borderWidth: 4.0,
+                                  bottomIcon: SvgPicture.asset(
+                                    "assets/icons/glass-fill.svg",
+                                    colorFilter: ColorFilter.mode(
+                                      AppColors.tuneColor,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                  bottomIconSize: 30,
+                                  bottomIconColor: Colors.blue.shade700,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Center(
+                        child: SizedBox(
+                          width: 170,
+                          child: ChipWidget(
+                            icon: Icon(
+                              Icons.water_drop_outlined,
+                              size: 20,
+                              color: AppColors.whiteColor,
+                            ),
+                            title: "Add Hydration",
                           ),
-                          title: "Add Hydration",
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
+
               BoxContainerWidget(
                 boxTitle: "Today's Hydration",
                 child: ListView.separated(
