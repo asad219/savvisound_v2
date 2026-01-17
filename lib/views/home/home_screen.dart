@@ -17,8 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
   static final List<Widget> _pages = <Widget>[
     DashboardScreen(),
     const Center(child: Text('Progress', style: TextStyle(fontSize: 22))),
-    const Center(child: Text('Schedule', style: TextStyle(fontSize: 22))),
     HydrateScreen(),
+    const Center(child: Text('Schedule', style: TextStyle(fontSize: 22))),
     const Center(child: Text('Track', style: TextStyle(fontSize: 22))),
     const Center(child: Text('Journey', style: TextStyle(fontSize: 22))),
   ];
@@ -191,13 +191,16 @@ class _NavItem extends StatelessWidget {
                   // subtle background for selected item to match screenshot feel
                   color: isSelected ? Colors.white24 : Colors.transparent,
                 ),
-                child: Center(
-                  child: IconTheme(
-                    data: IconThemeData(
-                      size: isSelected ? 28 : 22,
-                      color: isSelected ? selectedColor : unselectedColor,
+                child: SizedBox(
+                  width: isSelected ? 22 : 22,
+                  child: Center(
+                    child: IconTheme(
+                      data: IconThemeData(
+                        size: isSelected ? 28 : 22,
+                        //color: isSelected ? selectedColor : unselectedColor,
+                      ),
+                      child: icon,
                     ),
-                    child: icon,
                   ),
                 ),
               ),
