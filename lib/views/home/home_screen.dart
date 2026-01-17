@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:savvisound_v2/common/gradient_body.dart';
 import 'package:savvisound_v2/constants/app_colors.dart';
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     index: 0,
                     selectedIndex: _selectedIndex,
                     onTap: _onTap,
-                    icon: Iconsax.music,
+                    icon: Image.asset('assets/icons/home-tab-icon.png'),
                     label: 'Tune',
                     selectedColor: selectedColor,
                     unselectedColor: unselectedColor,
@@ -65,8 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     index: 1,
                     selectedIndex: _selectedIndex,
                     onTap: _onTap,
-                    icon: Iconsax.chart,
-                    label: 'Progress',
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-2-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Schedule',
                     selectedColor: selectedColor,
                     unselectedColor: unselectedColor,
                   ),
@@ -74,8 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     index: 2,
                     selectedIndex: _selectedIndex,
                     onTap: _onTap,
-                    icon: Iconsax.calendar,
-                    label: 'Schedule',
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-3-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Hydrate',
                     selectedColor: selectedColor,
                     unselectedColor: unselectedColor,
                   ),
@@ -83,8 +96,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     index: 3,
                     selectedIndex: _selectedIndex,
                     onTap: _onTap,
-                    icon: Icons.water_drop_outlined,
-                    label: 'Hydrate',
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-4-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Track',
                     selectedColor: selectedColor,
                     unselectedColor: unselectedColor,
                   ),
@@ -92,8 +111,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     index: 4,
                     selectedIndex: _selectedIndex,
                     onTap: _onTap,
-                    icon: Icons.map_outlined,
-                    label: 'Track',
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-5-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Progress',
                     selectedColor: selectedColor,
                     unselectedColor: unselectedColor,
                   ),
@@ -101,7 +126,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     index: 5,
                     selectedIndex: _selectedIndex,
                     onTap: _onTap,
-                    icon: Icons.explore_outlined,
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-6-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                     label: 'Journey',
                     selectedColor: selectedColor,
                     unselectedColor: unselectedColor,
@@ -122,7 +153,7 @@ class _NavItem extends StatelessWidget {
   final int index;
   final int selectedIndex;
   final void Function(int) onTap;
-  final IconData icon;
+  final Widget icon;
   final String label;
   final Color selectedColor;
   final Color unselectedColor;
@@ -160,10 +191,14 @@ class _NavItem extends StatelessWidget {
                   // subtle background for selected item to match screenshot feel
                   color: isSelected ? Colors.white24 : Colors.transparent,
                 ),
-                child: Icon(
-                  icon,
-                  size: isSelected ? 28 : 22,
-                  color: isSelected ? selectedColor : unselectedColor,
+                child: Center(
+                  child: IconTheme(
+                    data: IconThemeData(
+                      size: isSelected ? 28 : 22,
+                      color: isSelected ? selectedColor : unselectedColor,
+                    ),
+                    child: icon,
+                  ),
                 ),
               ),
               const SizedBox(height: 4),

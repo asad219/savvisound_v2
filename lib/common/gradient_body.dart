@@ -22,7 +22,7 @@ class _GradientBodyState extends State<GradientBody> {
             widget.isGradient
                 //? "assets/images/appbg.jpg"
                 //? "assets/images/bkg-1.jpg"
-                ? "assets/images/savvi-app-bg.jpg"
+                ? "assets/images/main-bkg.jpg"
                 : "assets/images/appbg-pink.jpg",
           ),
           fit: BoxFit.cover,

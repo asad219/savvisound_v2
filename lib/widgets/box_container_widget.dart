@@ -35,24 +35,26 @@ class BoxContainerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              boxTitle,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: AppColors.mainBg,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 5.0),
-              child: titleWidget ?? const SizedBox.shrink(),
-            ),
-          ],
-        ),
+        boxTitle.isNotEmpty
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    boxTitle,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.beigeColor,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 5.0),
+                    child: titleWidget ?? const SizedBox.shrink(),
+                  ),
+                ],
+              )
+            : const SizedBox.shrink(),
         const SizedBox(height: 12.0),
         Container(
           width: width,
@@ -60,7 +62,7 @@ class BoxContainerWidget extends StatelessWidget {
           padding: padding,
           margin: margin,
           decoration: BoxDecoration(
-            color: backgroundColor.withAlpha(30),
+            color: backgroundColor.withAlpha(100),
             borderRadius: BorderRadius.circular(borderRadius),
             border: border,
             boxShadow: boxShadow,

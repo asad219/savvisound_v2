@@ -66,6 +66,15 @@ dependencies:
   # Cached Network Image
   cached_network_image: ^3.4.1
 
+  # Syncfusion Slider
+  syncfusion_flutter_sliders: ^32.1.23
+
+  # Dropdown Button 2
+  dropdown_button2: ^2.3.9
+
+  # Gradient Borders
+  gradient_borders:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

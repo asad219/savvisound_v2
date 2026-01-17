@@ -50,7 +50,11 @@ class UpcomingScheduleWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Iconsax.clock, color: AppColors.mainBg, size: 40),
+                const Icon(
+                  Iconsax.clock,
+                  color: AppColors.beigeColor,
+                  size: 40,
+                ),
               ],
             ),
 
@@ -63,7 +67,7 @@ class UpcomingScheduleWidget extends StatelessWidget {
                 const Text(
                   'Date',
                   style: TextStyle(
-                    color: AppColors.primaryColor,
+                    color: AppColors.beigeColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
@@ -75,7 +79,7 @@ class UpcomingScheduleWidget extends StatelessWidget {
                     Text(
                       _formatDate(date),
                       style: TextStyle(
-                        color: textColor,
+                        color: AppColors.beigeColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -94,7 +98,7 @@ class UpcomingScheduleWidget extends StatelessWidget {
                 const Text(
                   'Time',
                   style: TextStyle(
-                    color: AppColors.primaryColor,
+                    color: AppColors.beigeColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
@@ -103,7 +107,7 @@ class UpcomingScheduleWidget extends StatelessWidget {
                 Text(
                   _formatTime(time),
                   style: TextStyle(
-                    color: textColor,
+                    color: AppColors.beigeColor,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                   ),
@@ -155,9 +159,9 @@ class _VerticalSeparator extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.mainBg.withAlpha(0),
-            AppColors.mainBg.withAlpha(100),
-            AppColors.mainBg.withAlpha(0),
+            AppColors.beigeColor.withAlpha(0),
+            AppColors.beigeColor.withAlpha(100),
+            AppColors.beigeColor.withAlpha(0),
           ],
         ),
       ),

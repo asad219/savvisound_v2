@@ -27,7 +27,7 @@ class WelcomeMessageWidget extends StatelessWidget {
         "https://alnisastore.com/wp-content/uploads/2025/11/photo.png",
     this.avatarRadius = 30,
     this.spacing = 16,
-    this.welcomeFontSize = 14,
+    this.welcomeFontSize = 16,
     this.nameFontSize = 22,
     this.welcomeTextColor,
     this.nameTextColor,
@@ -65,6 +65,7 @@ class WelcomeMessageWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: welcomeFontSize,
                 color: welcomeTextColor ?? Colors.grey.shade700,
+                fontWeight: FontWeight.w600,
               ),
             ),
             Text(

@@ -6,6 +6,11 @@ import 'package:savvisound_v2/widgets/chip_widget.dart';
 import 'package:savvisound_v2/widgets/dashboard_app_bar_widget.dart';
 import 'package:savvisound_v2/widgets/sound_player_widget.dart';
 import 'package:savvisound_v2/widgets/upcoming_schedule_widget.dart';
+import 'package:savvisound_v2/widgets/update_hydration_widget.dart';
+import 'package:savvisound_v2/widgets/app_textbox.dart';
+import 'package:savvisound_v2/widgets/app_button.dart';
+import 'package:savvisound_v2/widgets/app_button_outline.dart';
+import 'package:savvisound_v2/widgets/update_notes_widget.dart';
 import 'package:savvisound_v2/widgets/weight_goal_widget.dart';
 import 'package:savvisound_v2/widgets/welcome_message_widget.dart';
 
@@ -17,6 +22,10 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  double _sliderValue = 10;
+  String _hydrationNotes = '';
+  final TextEditingController _notesController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +35,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WelcomeMessageWidget(
@@ -34,6 +42,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 welcomeTextColor: AppColors.mainBg,
                 nameTextColor: AppColors.mainBg,
               ),
+              const SizedBox(height: 8),
               BoxContainerWidget(
                 child: SoundPlayerWidget(
                   repeatCount: 1,
@@ -43,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
                 ),
               ),
-
+              const SizedBox(height: 20),
               BoxContainerWidget(
                 titleWidget: ChipWidget(
                   icon: Icon(
@@ -58,20 +67,51 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 backgroundColor: AppColors.mainBg,
                 child: UpcomingScheduleWidget(),
               ),
+              const SizedBox(height: 20),
+              // Reusable hydration/value slider section under Upcoming Schedule
               BoxContainerWidget(
                 titleWidget: ChipWidget(
                   icon: Icon(
-                    Icons.water_drop_outlined,
+                    Iconsax.activity,
                     size: 20,
                     color: AppColors.whiteColor,
                   ),
-                  title: "Add Hydration",
+                  title: "View History",
                 ),
-
-                boxTitle: "Weight & Goal",
+                boxTitle: "Add Hydration",
                 backgroundColor: AppColors.mainBg,
-                child: WeightGoalWidget(),
+                child: UpdateHydrationWidget(
+                  value: _sliderValue,
+                  onChanged: (value) {
+                    setState(() {
+                      _sliderValue = value;
+                    });
+                  },
+                ),
               ),
+              const SizedBox(height: 20),
+              // Notes section under Add Hydration
+              BoxContainerWidget(
+                titleWidget: ChipWidget(
+                  icon: Icon(
+                    Iconsax.note,
+                    size: 20,
+                    color: AppColors.whiteColor,
+                  ),
+                  title: "View All",
+                ),
+                boxTitle: "Notes",
+                backgroundColor: AppColors.mainBg,
+                child: UpdateNotesWidget(
+                  controller: _notesController,
+                  onChanged: (text) {
+                    setState(() {
+                      _hydrationNotes = text;
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

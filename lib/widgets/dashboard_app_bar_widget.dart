@@ -30,7 +30,12 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
     final color = iconColor ?? AppColors.mainBg;
 
     return AppBar(
-      title: title != null
+      title: isDashboard
+          ? Image.asset(
+              'assets/images/savvi-sound-logo.png',
+              height: 40,
+            ).fadeIn(duration: animationDuration, delay: animationDelay)
+          : title != null
           ? Text(
               title!,
               style: const TextStyle(
@@ -43,40 +48,45 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leadingWidth: 100,
-      leading: isDashboard == false
-          ? null
-          : Padding(
-              padding: const EdgeInsets.only(left: 18.0),
-              child: Image.asset('assets/images/savvi-sound-logo.png'),
-            ).fadeIn(duration: animationDuration, delay: animationDelay),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: Row(
-            children: [
-              if (showFontSizeIcon) ...[
-                GestureDetector(
-                  onTap: onFontSizeTap,
-                  child: SvgPicture.asset(
-                    'assets/icons/font-size.svg',
-                    height: 40,
-                    colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                  ).fadeIn(duration: animationDuration, delay: animationDelay),
-                ),
-                const SizedBox(width: 8),
-              ],
-              GestureDetector(
+      leadingWidth: 56,
+      leading: isDashboard
+          ? Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: GestureDetector(
                 onTap: onHamburgerTap,
-                child: SvgPicture.asset(
-                  'assets/icons/hamburger.svg',
-                  height: 40,
-                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                child: Icon(
+                  Icons.menu,
+                  size: 30,
+                  color: color,
                 ).fadeIn(duration: animationDuration, delay: animationDelay),
               ),
-            ],
+            )
+          : null,
+      actions: [
+        if (showFontSizeIcon)
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: GestureDetector(
+              onTap: onFontSizeTap,
+              child: SvgPicture.asset(
+                'assets/icons/font-size.svg',
+                height: 40,
+                colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+              ).fadeIn(duration: animationDuration, delay: animationDelay),
+            ),
           ),
-        ),
+        if (!isDashboard && onHamburgerTap != null)
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: GestureDetector(
+              onTap: onHamburgerTap,
+              child: Icon(
+                Icons.menu,
+                size: 30,
+                color: color,
+              ).fadeIn(duration: animationDuration, delay: animationDelay),
+            ),
+          ),
       ],
     );
   }

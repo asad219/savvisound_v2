@@ -19,7 +19,7 @@ class ChipWidget extends StatelessWidget {
     this.icon,
     this.backgroundColor = AppColors.mainBg,
     this.borderColor = AppColors.mainBg,
-    this.iconBackgroundColor = AppColors.inputBorderColor,
+    this.iconBackgroundColor = AppColors.beigeColor,
     this.height = 35,
     this.borderRadius = 1,
     this.onTap,

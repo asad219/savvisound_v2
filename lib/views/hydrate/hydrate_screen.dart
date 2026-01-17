@@ -22,6 +22,18 @@ class _HydrateScreenState extends State<HydrateScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: DashboardAppBar(isDashboard: false, title: 'Hydrate'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // TODO: Hook up add hydration action
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Add hydration')));
+        },
+        backgroundColor: AppColors.mainBg,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.info, color: AppColors.whiteColor, size: 34),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),

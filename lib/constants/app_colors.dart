@@ -13,7 +13,7 @@ class AppColors {
   static const Color redWarning = Color(0xFFC92C30);
   static const Color lightGrey = Color(0xFF14316E);
   static const Color mainBg = Color(0xFF19305B);
-  static const Color inputBorderColor = Color(0xFFF2D3BC);
+  static const Color beigeColor = Color(0xFFF2D3BC);
   static const Color hydrationColor = Color(0xFFFD6767);
   static const Color tuneColor = Color(0xFF5E9AF7);
   static const Color toggleActiveColor = Color(0xFF34C659);

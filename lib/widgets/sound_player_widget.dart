@@ -86,33 +86,64 @@ class _SoundPlayerWidgetState extends State<SoundPlayerWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title Row
+          // Logo row (centered above)
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "SavviSound",
-                    style: TextStyle(
-                      color: AppColors.mainBg,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+              Image.asset('assets/images/savvi-sound-logo.png', height: 40),
+            ],
+          ),
+
+          const SizedBox(height: 16),
+
+          // Controls row: Play button, Progress bar, Repeat circle
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Play button
+              InkWell(
+                splashColor: AppColors.transparent,
+                onTap: () async {
+                  if (_isPlaying) {
+                    await _player.pause();
+                  } else {
+                    await _player.play();
+                    widget.onPlay?.call();
+                  }
+                },
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: const BoxDecoration(
+                    color: AppColors.mainBg,
+                    shape: BoxShape.circle,
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    "Relaxation & Focus",
-                    style: TextStyle(
-                      color: AppColors.mainBg.withAlpha(150),
-                      fontSize: 16,
-                    ),
+                  child: Icon(
+                    _isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: 32,
+                    color: AppColors.beigeColor,
                   ),
-                ],
+                ),
               ),
 
-              // Duration
+              const SizedBox(width: 12),
+
+              // Tune bar (progress bar)
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: LinearProgressIndicator(
+                    value: progressValue,
+                    minHeight: 12,
+                    backgroundColor: Colors.white24,
+                    valueColor: const AlwaysStoppedAnimation(Colors.white),
+                  ),
+                ),
+              ),
+
+              const SizedBox(width: 12),
+
+              // Repeat count circle (1x etc.)
               Container(
                 width: 60,
                 height: 60,
@@ -134,67 +165,15 @@ class _SoundPlayerWidgetState extends State<SoundPlayerWidget> {
             ],
           ),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 8),
 
-          // Progress Bar
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: LinearProgressIndicator(
-              value: progressValue,
-              minHeight: 12,
-              backgroundColor: Colors.white24,
-              valueColor: const AlwaysStoppedAnimation(Colors.white),
-            ),
-          ),
-
-          const SizedBox(height: 25),
-
-          // Bottom Row
+          // Timing row directly under tune bar (centered)
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Play button + repeat counter
-              Row(
-                children: [
-                  // Play button
-                  InkWell(
-                    splashColor: AppColors.transparent,
-                    onTap: () async {
-                      if (_isPlaying) {
-                        await _player.pause();
-                      } else {
-                        await _player.play();
-                        widget.onPlay?.call();
-                      }
-                    },
-                    child: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: const BoxDecoration(
-                        color: AppColors.mainBg,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        _isPlaying ? Icons.pause : Icons.play_arrow,
-                        size: 32,
-                        color: AppColors.inputBorderColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              // Progress Time
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const Text("Progress", style: TextStyle(color: Colors.white)),
-                  const SizedBox(height: 5),
-                  Text(
-                    "${_format(_position == Duration.zero ? widget.progress : _position)} / ${_format(_duration == Duration.zero ? widget.totalDuration : _duration)}",
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ],
+              Text(
+                "${_format(_position == Duration.zero ? widget.progress : _position)} / ${_format(_duration == Duration.zero ? widget.totalDuration : _duration)}",
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
             ],
           ),
