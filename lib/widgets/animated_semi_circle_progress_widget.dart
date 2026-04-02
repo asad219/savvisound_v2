@@ -1,14 +1,14 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 
 class AnimatedSemiCircleProgress extends StatefulWidget {
   final double progress; // 0–1
   final double strokeWidth;
   final Color color;
   final Duration duration;
-  final IconData startIcon;
-  final IconData endIcon;
+  final Widget startIcon;
+  final Widget endIcon;
 
   const AnimatedSemiCircleProgress({
     super.key,
@@ -16,8 +16,8 @@ class AnimatedSemiCircleProgress extends StatefulWidget {
     this.strokeWidth = 14,
     this.color = Colors.blue,
     this.duration = const Duration(seconds: 2),
-    this.startIcon = Iconsax.home_2,
-    this.endIcon = Iconsax.drop,
+    this.startIcon = const Icon(Iconsax.home_2),
+    this.endIcon = const Icon(Iconsax.drop),
   });
 
   @override
@@ -83,18 +83,10 @@ class _AnimatedSemiCircleProgressState extends State<AnimatedSemiCircleProgress>
             // ),
 
             /// LEFT ICON (Start of arc)
-            Positioned(
-              left: -15,
-              bottom: -40,
-              child: Icon(widget.startIcon, size: 28, color: widget.color),
-            ),
+            Positioned(left: -15, bottom: -40, child: widget.startIcon),
 
             /// RIGHT ICON (End of arc)
-            Positioned(
-              right: -15,
-              bottom: -40,
-              child: Icon(widget.endIcon, size: 28, color: widget.color),
-            ),
+            Positioned(right: -15, bottom: -40, child: widget.endIcon),
           ],
         );
       },

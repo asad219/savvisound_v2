@@ -1,0 +1,222 @@
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:savvisound_v2/common/gradient_body.dart';
+import 'package:savvisound_v2/constants/app_colors.dart';
+import 'package:savvisound_v2/routes/routes_import.dart';
+import 'package:savvisound_v2/views/hydrate/hydrate_screen.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  static final List<Widget> _pages = <Widget>[
+    DashboardScreen(),
+    const Center(child: Text('Progress', style: TextStyle(fontSize: 22))),
+    HydrateScreen(),
+    const Center(child: Text('Schedule', style: TextStyle(fontSize: 22))),
+    const Center(child: Text('Track', style: TextStyle(fontSize: 22))),
+    const Center(child: Text('Journey', style: TextStyle(fontSize: 22))),
+  ];
+
+  void _onTap(int idx) => setState(() => _selectedIndex = idx);
+
+  @override
+  Widget build(BuildContext context) {
+    // Colors tuned to the design in your image
+    final Color barColor = AppColors.mainBg; // very dark navy
+    final Color selectedColor = Colors.white;
+    final Color unselectedColor = Colors.white70;
+
+    return GradientBody(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: _pages[_selectedIndex],
+        // Use a floating action area so we can have rounded top corners & shadow
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+          child: PhysicalModel(
+            color: Colors.transparent,
+            elevation: 6,
+            borderRadius: BorderRadius.circular(20),
+            clipBehavior: Clip.antiAlias,
+            child: Container(
+              height: 82,
+              decoration: BoxDecoration(
+                color: barColor,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _NavItem(
+                    index: 0,
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    icon: Image.asset('assets/icons/home-tab-icon.png'),
+                    label: 'Tune',
+                    selectedColor: selectedColor,
+                    unselectedColor: unselectedColor,
+                  ),
+                  _NavItem(
+                    index: 1,
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-2-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Schedule',
+                    selectedColor: selectedColor,
+                    unselectedColor: unselectedColor,
+                  ),
+                  _NavItem(
+                    index: 2,
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-3-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Hydrate',
+                    selectedColor: selectedColor,
+                    unselectedColor: unselectedColor,
+                  ),
+                  _NavItem(
+                    index: 3,
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-4-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Track',
+                    selectedColor: selectedColor,
+                    unselectedColor: unselectedColor,
+                  ),
+                  _NavItem(
+                    index: 4,
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-5-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Progress',
+                    selectedColor: selectedColor,
+                    unselectedColor: unselectedColor,
+                  ),
+                  _NavItem(
+                    index: 5,
+                    selectedIndex: _selectedIndex,
+                    onTap: _onTap,
+                    icon: SvgPicture.asset(
+                      "assets/icons/bottom-nav-icon-6-idle.svg",
+                      colorFilter: ColorFilter.mode(
+                        unselectedColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: 'Journey',
+                    selectedColor: selectedColor,
+                    unselectedColor: unselectedColor,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Individual navigation item widget.
+/// Uses animation to scale icon and show label for the selected item.
+class _NavItem extends StatelessWidget {
+  final int index;
+  final int selectedIndex;
+  final void Function(int) onTap;
+  final Widget icon;
+  final String label;
+  final Color selectedColor;
+  final Color unselectedColor;
+
+  const _NavItem({
+    required this.index,
+    required this.selectedIndex,
+    required this.onTap,
+    required this.icon,
+    required this.label,
+    required this.selectedColor,
+    required this.unselectedColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isSelected = index == selectedIndex;
+
+    return Expanded(
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => onTap(index),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 220),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 220),
+                width: isSelected ? 42 : 26,
+                height: isSelected ? 42 : 26,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  // subtle background for selected item to match screenshot feel
+                  color: isSelected ? Colors.white24 : Colors.transparent,
+                ),
+                child: SizedBox(
+                  width: isSelected ? 22 : 22,
+                  child: Center(
+                    child: IconTheme(
+                      data: IconThemeData(
+                        size: isSelected ? 28 : 22,
+                        //color: isSelected ? selectedColor : unselectedColor,
+                      ),
+                      child: icon,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              AnimatedDefaultTextStyle(
+                duration: const Duration(milliseconds: 220),
+                style: TextStyle(
+                  fontSize: isSelected ? 11 : 10,
+                  color: isSelected ? selectedColor : unselectedColor,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                ),
+                child: Text(label),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
