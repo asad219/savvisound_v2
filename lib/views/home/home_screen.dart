@@ -1,5 +1,4 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:savvisound_v2/common/gradient_body.dart';
 import 'package:savvisound_v2/constants/app_colors.dart';
 import 'package:savvisound_v2/routes/routes_import.dart';

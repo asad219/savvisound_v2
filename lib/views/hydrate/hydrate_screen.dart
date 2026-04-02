@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:savvisound_v2/constants/app_colors.dart';
 import 'package:savvisound_v2/widgets/box_container_widget.dart';
@@ -172,7 +171,7 @@ class _HydrateScreenState extends State<HydrateScreen> {
               ),
               const SizedBox(height: 8),
               BoxContainerWidget(
-                boxTitle: "Add Hydration",
+                boxTitle: "Hydration",
                 child: UpdateHydrationWidget(
                   value: _sliderValue,
                   onChanged: (value) {
@@ -214,7 +213,7 @@ class _HydrateScreenState extends State<HydrateScreen> {
                         itemBuilder: (context, index) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               IconButton(
                                 onPressed: () {},
@@ -289,7 +288,7 @@ class _HydrateScreenState extends State<HydrateScreen> {
                           height: 150,
                           width: 120,
                           child: WaterGlass(
-                            percentage: _animationVersion,
+                            percentage: .5,
                             key: ValueKey(_animationVersion),
                           ),
                         ),

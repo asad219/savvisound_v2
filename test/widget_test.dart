@@ -8,8 +8,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:savvisound_v2/main.dart';
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 

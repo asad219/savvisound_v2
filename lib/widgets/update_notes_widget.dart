@@ -38,7 +38,7 @@ class UpdateNotesWidget extends StatelessWidget {
         AppButtonOutline(
           child: Center(
             child: AppButton(
-              title: 'Update Notes',
+              title: 'Update Journey',
               titleColor: AppColors.whiteColor,
               fontSize: 18,
               isFontBold: true,

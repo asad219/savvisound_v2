@@ -7,11 +7,7 @@ import 'package:savvisound_v2/widgets/dashboard_app_bar_widget.dart';
 import 'package:savvisound_v2/widgets/sound_player_widget.dart';
 import 'package:savvisound_v2/widgets/upcoming_schedule_widget.dart';
 import 'package:savvisound_v2/widgets/update_hydration_widget.dart';
-import 'package:savvisound_v2/widgets/app_textbox.dart';
-import 'package:savvisound_v2/widgets/app_button.dart';
-import 'package:savvisound_v2/widgets/app_button_outline.dart';
 import 'package:savvisound_v2/widgets/update_notes_widget.dart';
-import 'package:savvisound_v2/widgets/weight_goal_widget.dart';
 import 'package:savvisound_v2/widgets/welcome_message_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -76,9 +72,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     size: 20,
                     color: AppColors.whiteColor,
                   ),
-                  title: "View History",
+                  title: "View All",
                 ),
-                boxTitle: "Add Hydration",
+                boxTitle: "Hydration",
                 backgroundColor: AppColors.mainBg,
                 child: UpdateHydrationWidget(
                   value: _sliderValue,
@@ -90,7 +86,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Notes section under Add Hydration
+              // Notes section under Hydration
               BoxContainerWidget(
                 titleWidget: ChipWidget(
                   icon: Icon(

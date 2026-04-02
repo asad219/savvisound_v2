@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:savvisound_v2/constants/app_colors.dart';
-import 'package:savvisound_v2/constants/app_constants.dart';
 
 class SoundPlayerWidget extends StatefulWidget {
   final int repeatCount;
